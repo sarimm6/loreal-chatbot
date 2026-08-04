@@ -82,6 +82,7 @@ body {
 }
 
 .chat-window {
+  position: relative;
   height: 360px;
   border: 1px solid var(--black);
   padding: 20px;
@@ -89,21 +90,41 @@ body {
   line-height: 1.5;
   overflow-y: auto;
   background: var(--white);
-  white-space: pre-line;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* This space lets the newest question scroll all the way to the top. */
+.chat-window::after {
+  content: "";
+  flex: 0 0: calc(100% - 80px);
 }
 
 /* messages */
 .msg {
-  margin-bottom: 14px;
+  width: fit-content;
+  max-width: 78%;
+  padding: 12px 16px;
+  border-radius: 18px;
   line-height: 1.5;
+  white-space: pre-line;
+  overflow-wrap: anywhere;
 }
 
 .msg.user {
-  color: var(--black);
+  align-self: flex-end;
+  color: var(--white);
+  background: var(--black);
+  border-bottom-right-radius: 4px;
 }
 
 .msg.ai {
-  color: var(--mid-gray);
+  align-self: flex-start;
+  color: var(--black);
+  background: var(--soft-gray);
+  border-left: 4px solid var(--passionate-red);
+  border-bottom-left-radius: 4px;
 }
 
 /* input row */
@@ -213,6 +234,10 @@ body {
     height: 330px;
     padding: 16px;
     font-size: 16px;
+  }
+
+  .msg {
+    max-width: 88%;
   }
 
   .chat-form {
